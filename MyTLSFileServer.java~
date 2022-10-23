@@ -1,0 +1,38 @@
+import java.security.KeyStore;
+import java.security.cert.X509Certificate;
+import java.naming.Idap.*;
+import javax.net.*;
+import java.io.*;
+
+class MyTLSFileServer{
+
+
+    private static ServerSocketFactory getSSF(){
+	/*
+	 * Get an SSL Context that speaks some version
+	 * of TLS, a KeyManager that can hold certs in * X.509 format, and a JavaKeyStore (JKS)
+	 * instance
+	 */
+	SSLContext ctx =
+	    SSLContext.getInstance("TLS");
+	KeyManagerFactory kmf =
+	    KeyManagerFactory.getInstance("SunX509");
+	KeyStore ks =
+	    KeyStore.getInstance("JKS");
+	try{
+	    Console cons;
+	    char[] passwd;
+	    if ((cons = System.console()) != null &&
+		(passwd = cons.readPassword("[%s]", "Password:")) != null) {
+
+		ks.load(new FileInputStream("server.jks"),
+			passphrase);
+
+		
+		java.util.Arrays.fill(passwd, ' ');
+	    }
+	}catch(Exception e){
+	    System.err.println(e);
+	}
+    }
+}
